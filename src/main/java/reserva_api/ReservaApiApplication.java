@@ -67,9 +67,9 @@ public class ReservaApiApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		//TimeUnit.SECONDS.sleep(10);
 		cadastrarPessoas();
-		//cadastrarRecursos();
-		//cadastrarSolicitacao();
-		//cadastrarViagem();
+		cadastrarRecursos();
+		cadastrarSolicitacao();
+		cadastrarViagem();
 	}
 
 	private void cadastrarViagem() {
@@ -89,8 +89,8 @@ public class ReservaApiApplication implements CommandLineRunner {
 	}
 
 	private void cadastrarSolicitacao() {
-		Solicitacao sl1 = new Solicitacao(null, LocalDateTime.parse("04-03-2023 10:00", ftr),
-				LocalDateTime.parse("04-03-2023 12:00", ftr), " Viagem para tabalho de campo.", LocalDateTime.now(),
+		Solicitacao sl1 = new Solicitacao(null, LocalDateTime.parse("25-04-2023 10:00", ftr),
+				LocalDateTime.parse("25-04-2023 12:00", ftr), " Viagem para tabalho de campo.", LocalDateTime.now(),
 				null, null, StatusSolicitacao.SOLICITADO, new Pessoa(1L));
 		sl1.getRecursos().add(new Transporte(1L));
 		sl1.getRecursos().add(new Equipamento(6L));
@@ -134,7 +134,6 @@ public class ReservaApiApplication implements CommandLineRunner {
 				LocalDate.parse("15-06-1980", fdate), st3, TipoVinculo.TERCEIRIZADO, new Telefone(TipoTelefone.FIXO, "(51) 2895-1562"),
 				"60427048705");
 		pessoaRepository.saveAll(Arrays.asList(ps1, ps2, ps3, ps4));
-
 	}
 
 }
