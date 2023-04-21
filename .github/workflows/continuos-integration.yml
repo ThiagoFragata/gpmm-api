@@ -28,11 +28,11 @@ jobs:
         cache: maven
         
     - name: Build with Maven
-      working-directory: ./reserva_api
+      working-directory: ./reserva-api
       run: mvn clean package -DskipTests
       
     - name: Docker Compose Build
-      working-directory: ./reserva_api
+      working-directory: ./reserva-api
       run: docker compose build
 
     - name: Push to Docker Hub Container Registry
