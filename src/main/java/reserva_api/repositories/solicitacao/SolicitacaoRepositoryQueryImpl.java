@@ -92,7 +92,7 @@ public class SolicitacaoRepositoryQueryImpl implements SolicitacaoRepositoryQuer
 		Join<Solicitacao, Pessoa> pessoaJoin = root.join("solicitante");
 
 		List<Predicate> predicates = criarRestricoes(recursoFilter, builder, root, recursoJoin, Equipamento.class);
-		//predicates.add(builder.equal(recursoJoin.type(), Equipamento.class));
+		
 
 		criteria.orderBy(builder.asc(root.get("dataInicio")));
 		criteria.distinct(true);
@@ -117,7 +117,7 @@ public class SolicitacaoRepositoryQueryImpl implements SolicitacaoRepositoryQuer
 		Join<Solicitacao, Pessoa> pessoaJoin = root.join("solicitante");
 
 		List<Predicate> predicates = criarRestricoes(recursoFilter, builder, root, recursoJoin, Transporte.class);
-		//predicates.add(builder.equal(recursoJoin.type(), Transporte.class));
+		
 
 		criteria.orderBy(builder.asc(root.get("dataInicio")));
 		criteria.distinct(true);
