@@ -79,7 +79,8 @@ public class SolicitacaoService {
 		solicitacao.setDataSolicitacao(LocalDateTime.now());
 		solicitacao.setStatus(StatusSolicitacao.SOLICITADO);
 		pessoaRepository.findById(solicitacao.getSolicitante().getId()).orElseThrow();
-		RecursoFilter recursoFilter = new RecursoFilter(null, solicitacao.getDataInicio(), solicitacao.getDataFinal());
+		RecursoFilter recursoFilter = new RecursoFilter(null, solicitacao.getDataInicio(), 
+				solicitacao.getDataFinal(),solicitacao.getStatus());
 		for (Recurso r : solicitacao.getRecursos()) {
 			recursoRepository.findById(r.getId()).orElseThrow();
 			recursoFilter.setIdRecurso(r.getId());
@@ -98,7 +99,8 @@ public class SolicitacaoService {
 		Solicitacao solicitacaoSalva = solicitacaoRepository.findById(id).orElseThrow();
 		
 		pessoaRepository.findById(solicitacao.getSolicitante().getId()).orElseThrow();
-		RecursoFilter recursoFilter = new RecursoFilter(null, solicitacao.getDataInicio(), solicitacao.getDataFinal());
+		RecursoFilter recursoFilter = new RecursoFilter(null, solicitacao.getDataInicio(), 
+				solicitacao.getDataFinal(),solicitacao.getStatus());
 		for (Recurso r : solicitacao.getRecursos()) {
 			recursoRepository.findById(r.getId()).orElseThrow();
 			recursoFilter.setIdRecurso(r.getId());

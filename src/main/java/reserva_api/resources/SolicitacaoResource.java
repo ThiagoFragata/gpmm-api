@@ -50,17 +50,17 @@ public class SolicitacaoResource {
 		return ResponseEntity.ok().body(solicitacaoService.todasReservaPorData(recursoFilter, pageable));
 	}
 	
-	@GetMapping("/locais")
+	@GetMapping("/resumo/locais")
 	public ResponseEntity<Page<ReservaDto>> buscarReservasLocal(RecursoFilter recursoFilter, Pageable pageable) {
 		return ResponseEntity.ok().body(solicitacaoService.reservaLocalPorData(recursoFilter, pageable));
 	}
 	
-	@GetMapping("/equipamentos")
+	@GetMapping("/resumo/equipamentos")
 	public ResponseEntity<Page<ReservaDto>> buscarReservasEquipamento(RecursoFilter recursoFilter, Pageable pageable) {
 		return ResponseEntity.ok().body(solicitacaoService.reservaEquipamentoPorData(recursoFilter, pageable));
 	}
 	
-	@GetMapping("/transportes")
+	@GetMapping("/resumo/transportes")
 	public ResponseEntity<Page<ReservaDto>> buscarReservasTransporte(RecursoFilter recursoFilter, Pageable pageable) {
 		return ResponseEntity.ok().body(solicitacaoService.reservaTransportePorData(recursoFilter, pageable));
 	}

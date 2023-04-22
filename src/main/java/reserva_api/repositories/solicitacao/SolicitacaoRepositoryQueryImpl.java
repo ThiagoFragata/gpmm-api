@@ -166,9 +166,13 @@ public class SolicitacaoRepositoryQueryImpl implements SolicitacaoRepositoryQuer
 			predicates.add(builder.greaterThan(root.get("dataFinal"), recursoFilter.getDataInicio()));
 			predicates.add(builder.lessThan(root.get("dataInicio"), recursoFilter.getDataFinal()));
 		}
+		if (!ObjectUtils.isEmpty(recursoFilter.getStatus())) {
+			predicates.add(builder.equal(root.get("status"), recursoFilter.getStatus()));
+		}
 		if (!ObjectUtils.isEmpty(recursoFilter.getIdRecurso())) {
 			predicates.add(builder.equal(recursoJoin.get("id"), recursoFilter.getIdRecurso()));
 		}
+		
 		if (c!=null) {
 			predicates.add(builder.equal(recursoJoin.type(), c));			
 		}
