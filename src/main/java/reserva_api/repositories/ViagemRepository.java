@@ -12,6 +12,6 @@ import reserva_api.model.Viagem;
 
 @Repository
 public interface ViagemRepository extends JpaRepository<Viagem, Long>  {
-	public Optional<List<Viagem>> findBySolicitacao(Solicitacao solicitacao);
+	public Optional<Viagem> findBySolicitacao(Solicitacao solicitacao);
 
 }

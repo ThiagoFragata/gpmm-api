@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import reserva_api.model.Solicitacao;
@@ -28,15 +30,15 @@ public class ViagemService {
 	@Autowired
 	private PessoaRepository pessoaRepository;
 
-	public List<Viagem> buscarTodas() {
-		return viagemRepository.findAll();
+	public Page<Viagem> buscarTodas(Pageable pageable) {
+		return viagemRepository.findAll(pageable);
 	}
 
 	public Viagem buscarPorId(Long id) {
 		return viagemRepository.findById(id).orElseThrow();
 	}
 
-	public List<Viagem> buscarPorSolicitacao(Long id) {
+	public Viagem buscarPorSolicitacao(Long id) {
 		Solicitacao solicitacao = solicitacaoRepository.findById(id).orElseThrow();
 		return viagemRepository.findBySolicitacao(solicitacao).orElseThrow();
 	}

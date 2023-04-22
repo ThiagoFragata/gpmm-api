@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,34 +35,34 @@ public class SolicitacaoResource {
 	@Autowired
 	private ViagemService viagemService;
 	
-	@GetMapping("/reservas/estalivre")
+	@GetMapping
+	public ResponseEntity<Page<Solicitacao>> buscarTodas(Pageable pageable) {
+		return ResponseEntity.ok().body(solicitacaoService.buscarTodas(pageable));
+	}
+	
+	@GetMapping("/estalivre")
 	public ResponseEntity<Boolean> isLivre(RecursoFilter recursoFilter) {
 		return ResponseEntity.ok().body(solicitacaoService.IsLivre(recursoFilter));
 	}
 
-	@GetMapping("/reservas/por-data")
-	public ResponseEntity<List<ReservaDto>> buscarReservas(RecursoFilter recursoFilter) {
-		return ResponseEntity.ok().body(solicitacaoService.todasReservaPorData(recursoFilter));
+	@GetMapping("/resumo")
+	public ResponseEntity<Page<ReservaDto>> buscarReservas(RecursoFilter recursoFilter, Pageable pageable) {
+		return ResponseEntity.ok().body(solicitacaoService.todasReservaPorData(recursoFilter, pageable));
 	}
 	
-	@GetMapping("/reservas/locais/por-data")
-	public ResponseEntity<List<ReservaDto>> buscarReservasLocal(RecursoFilter recursoFilter) {
-		return ResponseEntity.ok().body(solicitacaoService.reservaLocalPorData(recursoFilter));
+	@GetMapping("/locais")
+	public ResponseEntity<Page<ReservaDto>> buscarReservasLocal(RecursoFilter recursoFilter, Pageable pageable) {
+		return ResponseEntity.ok().body(solicitacaoService.reservaLocalPorData(recursoFilter, pageable));
 	}
 	
-	@GetMapping("/reservas/equipamentos/por-data")
-	public ResponseEntity<List<ReservaDto>> buscarReservasEquipamento(RecursoFilter recursoFilter) {
-		return ResponseEntity.ok().body(solicitacaoService.reservaEquipamentoPorData(recursoFilter));
+	@GetMapping("/equipamentos")
+	public ResponseEntity<Page<ReservaDto>> buscarReservasEquipamento(RecursoFilter recursoFilter, Pageable pageable) {
+		return ResponseEntity.ok().body(solicitacaoService.reservaEquipamentoPorData(recursoFilter, pageable));
 	}
 	
-	@GetMapping("/reservas/transportes/por-data")
-	public ResponseEntity<List<ReservaDto>> buscarReservasTransporte(RecursoFilter recursoFilter) {
-		return ResponseEntity.ok().body(solicitacaoService.reservaTransportePorData(recursoFilter));
-	}
-
-	@GetMapping
-	public ResponseEntity<List<Solicitacao>> buscarTodas() {
-		return ResponseEntity.ok().body(solicitacaoService.buscarTodas());
+	@GetMapping("/transportes")
+	public ResponseEntity<Page<ReservaDto>> buscarReservasTransporte(RecursoFilter recursoFilter, Pageable pageable) {
+		return ResponseEntity.ok().body(solicitacaoService.reservaTransportePorData(recursoFilter, pageable));
 	}
 
 	@GetMapping(value = "/{id}")
@@ -95,12 +97,12 @@ public class SolicitacaoResource {
 	}
 
 	@GetMapping(value = "/viagens")
-	public ResponseEntity<List<Viagem>> buscarTodasViagens() {
-		return ResponseEntity.ok().body(viagemService.buscarTodas());
+	public ResponseEntity<Page<Viagem>> buscarTodasViagens(Pageable pageable) {
+		return ResponseEntity.ok().body(viagemService.buscarTodas(pageable));
 	}
 
 	@GetMapping(value = "/viagens/{id}")
-	public ResponseEntity<List<Viagem>> buscarPorSolicitacao(@PathVariable Long id) {
+	public ResponseEntity<Viagem> buscarPorSolicitacao(@PathVariable Long id) {
 		return ResponseEntity.ok().body(viagemService.buscarPorSolicitacao(id));
 	}
 

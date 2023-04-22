@@ -5,6 +5,9 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
@@ -32,24 +35,24 @@ public class SolicitacaoService {
 	@Autowired
 	private RecursoRepository recursoRepository;
 
-	public List<Solicitacao> buscarTodas() {
-		return solicitacaoRepository.findAll();
+	public Page<Solicitacao> buscarTodas(Pageable pageable) {
+		return solicitacaoRepository.findAll(pageable);
 	}
 
-	public List<ReservaDto> todasReservaPorData(RecursoFilter recursoFilter) {
-		return solicitacaoRepository.todasReservaPorData(recursoFilter);
+	public Page<ReservaDto> todasReservaPorData(RecursoFilter recursoFilter, Pageable pageable) {
+		return solicitacaoRepository.todasReservaPorData(recursoFilter, pageable);
 	}
 
-	public List<ReservaDto> reservaTransportePorData(RecursoFilter recursoFilter) {
-		return solicitacaoRepository.reservaTransportePorData(recursoFilter);
+	public Page<ReservaDto> reservaTransportePorData(RecursoFilter recursoFilter, Pageable pageable) {
+		return solicitacaoRepository.reservaTransportePorData(recursoFilter, pageable);
 	}
 
-	public List<ReservaDto> reservaEquipamentoPorData(RecursoFilter recursoFilter) {
-		return solicitacaoRepository.reservaEquipamentoPorData(recursoFilter);
+	public Page<ReservaDto> reservaEquipamentoPorData(RecursoFilter recursoFilter, Pageable pageable) {
+		return solicitacaoRepository.reservaEquipamentoPorData(recursoFilter, pageable);
 	}
 
-	public List<ReservaDto> reservaLocalPorData(RecursoFilter recursoFilter) {
-		return solicitacaoRepository.reservaLocalPorData(recursoFilter);
+	public Page<ReservaDto> reservaLocalPorData(RecursoFilter recursoFilter, Pageable pageable) {
+		return solicitacaoRepository.reservaLocalPorData(recursoFilter, pageable);
 	}
 
 	public Solicitacao buscarPorId(Long id) {
@@ -62,12 +65,13 @@ public class SolicitacaoService {
 	}
 
 	public Boolean IsLivre(RecursoFilter recursoFilter) {
+		Pageable pageable = PageRequest.of(0, 20);
 		if(ObjectUtils.isEmpty(recursoFilter.getIdRecurso()) || 
 				ObjectUtils.isEmpty(recursoFilter.getDataInicio()) ||
 				ObjectUtils.isEmpty(recursoFilter.getDataFinal())) {
 			throw new AllPropertiesIsRequiredException();
 		}
-		List<ReservaDto> reservas = solicitacaoRepository.todasReservaPorData(recursoFilter);
+		Page<ReservaDto> reservas = solicitacaoRepository.todasReservaPorData(recursoFilter, pageable);
 		return reservas.isEmpty();
 	}
 
