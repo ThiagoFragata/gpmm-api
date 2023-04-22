@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,8 +20,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import jakarta.validation.Valid;
 import reserva_api.model.Equipamento;
 import reserva_api.model.Local;
-import reserva_api.model.Motorista;
-import reserva_api.model.Pessoa;
 import reserva_api.model.Recurso;
 import reserva_api.model.Transporte;
 import reserva_api.services.RecursoService;
@@ -32,8 +32,8 @@ public class RecursoResource {
 	private RecursoService recursoService;
 
 	@GetMapping
-	public ResponseEntity<List<Recurso>> buscarTodos() {
-		return ResponseEntity.ok().body(recursoService.buscarTodos());
+	public ResponseEntity<Page<Recurso>> buscarTodos(Pageable pageable) {
+		return ResponseEntity.ok().body(recursoService.buscarTodos(pageable));
 	}
 
 	@GetMapping(value = "/{id}")
@@ -49,8 +49,8 @@ public class RecursoResource {
 	}
 
 	@GetMapping(value = "/transportes")
-	public ResponseEntity<List<Transporte>> buscarTransportes() {
-		return ResponseEntity.ok().body(recursoService.buscarTransportes());
+	public ResponseEntity<Page<Transporte>> buscarTransportes(Pageable pageable) {
+		return ResponseEntity.ok().body(recursoService.buscarTransportes(pageable));
 	}
 
 	@PostMapping(value = "/transportes")
@@ -68,8 +68,8 @@ public class RecursoResource {
 	}
 
 	@GetMapping(value = "/locais")
-	public ResponseEntity<List<Local>> buscarLocais() {
-		return ResponseEntity.ok().body(recursoService.buscarLocais());
+	public ResponseEntity<Page<Local>> buscarLocais(Pageable pageable) {
+		return ResponseEntity.ok().body(recursoService.buscarLocais(pageable));
 	}
 
 	@PostMapping(value = "/locais")
@@ -87,8 +87,8 @@ public class RecursoResource {
 	}
 
 	@GetMapping(value = "/equipamentos")
-	public ResponseEntity<List<Equipamento>> buscarEquipamentos() {
-		return ResponseEntity.ok().body(recursoService.buscarEquipamentos());
+	public ResponseEntity<Page<Equipamento>> buscarEquipamentos(Pageable pageable) {
+		return ResponseEntity.ok().body(recursoService.buscarEquipamentos(pageable));
 	}
 
 	@PostMapping(value = "/equipamentos")

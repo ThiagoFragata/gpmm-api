@@ -1,9 +1,10 @@
 package reserva_api.resources;
 
 import java.net.URI;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,8 +29,8 @@ public class PessoaResource {
 	private PessoaService pessoaService;
 
 	@GetMapping
-	public ResponseEntity<List<Pessoa>> buscarTodos() {
-		return ResponseEntity.ok().body(pessoaService.buscarTodos());
+	public ResponseEntity<Page<Pessoa>> buscarTodos(Pageable pageable) {
+		return ResponseEntity.ok().body(pessoaService.buscarTodos(pageable));
 	}
 
 	@GetMapping(value = "/{id}")

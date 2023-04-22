@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import reserva_api.model.Equipamento;
@@ -30,8 +32,8 @@ public class RecursoService {
 	@Autowired
 	private EquipamentoRepository equipamentoRepository;
 
-	public List<Recurso> buscarTodos() {
-		return recursoRepository.findAll();
+	public Page<Recurso> buscarTodos(Pageable pageable) {
+		return recursoRepository.findAll(pageable);
 	}
 
 	public Recurso buscarPorId(Long id) {
@@ -42,8 +44,8 @@ public class RecursoService {
 		recursoRepository.deleteById(id);
 	}
 
-	public List<Transporte> buscarTransportes() {
-		return transporteRepository.findAll();
+	public Page<Transporte> buscarTransportes(Pageable pageable) {
+		return transporteRepository.findAll(pageable);
 	}
 
 	public Transporte salvar(Transporte transporte) {
@@ -56,8 +58,8 @@ public class RecursoService {
 		return transporteRepository.save(transporteSalvo);
 	}
 
-	public List<Local> buscarLocais() {
-		return localRepository.findAll();
+	public Page<Local> buscarLocais(Pageable pageable) {
+		return localRepository.findAll(pageable);
 	}
 	
 	public Local salvar(Local local) {
@@ -70,8 +72,8 @@ public class RecursoService {
 		return localRepository.save(localSalvo);
 	}
 
-	public List<Equipamento> buscarEquipamentos() {
-		return equipamentoRepository.findAll();
+	public Page<Equipamento> buscarEquipamentos(Pageable pageable) {
+		return equipamentoRepository.findAll(pageable);
 	}
 	
 	public Equipamento salvar(Equipamento equipamento) {

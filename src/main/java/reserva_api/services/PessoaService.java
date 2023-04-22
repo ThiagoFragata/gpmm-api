@@ -1,8 +1,8 @@
 package reserva_api.services;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import reserva_api.model.Motorista;
@@ -19,8 +19,8 @@ public class PessoaService {
 	@Autowired
 	private MotoristaRepository motoristaRepository;
 
-	public List<Pessoa> buscarTodos() {
-		return pessoaRepository.findAll();
+	public Page<Pessoa> buscarTodos(Pageable pageable) {
+		return pessoaRepository.findAll(pageable);
 	}
 
 	public Pessoa buscarPorId(Long id) {

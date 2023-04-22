@@ -1,8 +1,8 @@
 package reserva_api.services;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import reserva_api.model.Setor;
@@ -14,8 +14,8 @@ public class SetorService {
 	@Autowired
 	private SetorRepository setorRepository;
 
-	public List<Setor> buscarTodos() {
-		return setorRepository.findAll();
+	public Page<Setor> buscarTodos(Pageable pageable) {
+		return setorRepository.findAll(pageable);
 	}
 
 	public Setor buscarPorId(Long id) {
