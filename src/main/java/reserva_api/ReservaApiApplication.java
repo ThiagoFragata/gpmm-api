@@ -66,10 +66,10 @@ public class ReservaApiApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		//TimeUnit.SECONDS.sleep(10);
-		cadastrarPessoas();
-		cadastrarRecursos();
-		cadastrarSolicitacao();
-		cadastrarViagem();
+		//cadastrarPessoas();
+		//cadastrarRecursos();
+		//cadastrarSolicitacao();
+		//cadastrarViagem();
 	}
 
 	private void cadastrarViagem() {
