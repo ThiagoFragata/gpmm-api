@@ -5,10 +5,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import reserva_api.dto.PessoaDto;
 import reserva_api.model.Motorista;
 import reserva_api.model.Pessoa;
 import reserva_api.repositories.MotoristaRepository;
 import reserva_api.repositories.PessoaRepository;
+import reserva_api.repositories.filters.PessoaFilter;
 
 @Service
 public class PessoaService {
@@ -21,6 +23,10 @@ public class PessoaService {
 
 	public Page<Pessoa> buscarTodos(Pageable pageable) {
 		return pessoaRepository.findAll(pageable);
+	}
+	
+	public Page<PessoaDto> filtarTodas(PessoaFilter pessoaFilter,Pageable pageable) {
+		return pessoaRepository.filtrarPessoa(pessoaFilter, pageable);
 	}
 
 	public Pessoa buscarPorId(Long id) {

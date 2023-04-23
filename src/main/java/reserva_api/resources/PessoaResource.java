@@ -17,8 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import jakarta.validation.Valid;
+import reserva_api.dto.PessoaDto;
 import reserva_api.model.Motorista;
 import reserva_api.model.Pessoa;
+import reserva_api.repositories.filters.PessoaFilter;
+import reserva_api.repositories.filters.RecursoFilter;
 import reserva_api.services.PessoaService;
 
 @RestController
@@ -31,6 +34,11 @@ public class PessoaResource {
 	@GetMapping
 	public ResponseEntity<Page<Pessoa>> buscarTodos(Pageable pageable) {
 		return ResponseEntity.ok().body(pessoaService.buscarTodos(pageable));
+	}
+	
+	@GetMapping("/resumo")
+	public ResponseEntity<Page<PessoaDto>> filtarPessoa(PessoaFilter pessoaFilter,Pageable pageable) {
+		return ResponseEntity.ok().body(pessoaService.filtarTodas(pessoaFilter, pageable));
 	}
 
 	@GetMapping(value = "/{id}")
